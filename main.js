@@ -2,30 +2,9 @@
 
 // @ts-check
 
-/**
- * @typedef User
- * @property {string} email
- * @property {string} name
- */
+/** @typedef {import('./lib/user').User} User */
 
-/**
- * 
- * @param {string} email 
- * @returns {boolean}
- */
-function sendWelcomeEmail(email) {
-  // ... send emails
-  console.log('email sent to ', email)
-  return true
-}
-
-/**
- * @param {User} user 
- */
-function subscribe(user) {
-  // .. save to storage
-  sendWelcomeEmail(user.email)
-}
+const { subscribe } = require('./lib/user')
 
 function main () {
   /** @type {string} */
@@ -33,7 +12,12 @@ function main () {
   /** @type {string} */
   const email = process.argv[3]
 
-  const user = {name, email}
+  /** @type User */
+  const user = {
+    name,
+    email,
+    profile: { subscription: new Date(), account: 'BASIC' }
+  }
 
   subscribe(user)
 }
